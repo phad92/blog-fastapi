@@ -1,18 +1,19 @@
 from fastapi import FastAPI
 import models
 from database import engine 
-from routers import blog, user
+from routers import blog, user, auth
 # from passlib.context import CryptContext
 
+
 tags_metadata = [
-    {
-        "name": "users",
-        "description": "Operations with users. The **login** is also here"
-    },
-    {
-        "name": "blog",
-        "description": "Manage Items",
-    },
+    # {
+    #     "name": "users",
+    #     "description": "Operations with users. The **login** is also here"
+    # },
+    # {
+    #     "name": "blog",
+    #     "description": "Manage Items",
+    # },
     # {
     #     "name": "items",
     #     "description": "Manage Items",
@@ -26,6 +27,7 @@ tags_metadata = [
 
 app = FastAPI(openapi_tags=tags_metadata)
 
+app.include_router(auth.router)
 app.include_router(blog.router)
 app.include_router(user.router)
 
